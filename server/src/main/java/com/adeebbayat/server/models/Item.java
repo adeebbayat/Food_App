@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -44,6 +45,9 @@ public class Item {
     )
     private List<Order> orders;
 
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="restaurant_id")
+    private Restaurant restaurant;
 
     public Item() {
     }
