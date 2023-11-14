@@ -3,6 +3,8 @@ package com.adeebbayat.server.models;
 import jakarta.persistence.Transient;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -43,9 +45,11 @@ public class User {
     @Size(min=8, max = 128, message="Confirm Password must be at least 8 characters!")
     private String confirm;
 
+    
     @OneToMany(mappedBy="user",fetch = FetchType.LAZY)
     private List<Order> orders;
 
+    
     @OneToMany(mappedBy="user",fetch = FetchType.LAZY)
     private List<Payment> payments;
 

@@ -2,7 +2,7 @@ package com.adeebbayat.server.models;
 
 import java.util.List;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -24,11 +24,13 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
+    
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="user_id")
     private User user;
 
+    
     @ManyToMany(fetch=FetchType.LAZY)
     @JoinTable(
         name="orders_items",
@@ -37,9 +39,12 @@ public class Order {
     )
     private List<Item> items;
 
-    @OneToOne(mappedBy="order",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+    
+    @OneToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="payment_id")
     private Payment payment;
 
+    
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="restaurant_id")
     private Restaurant restaurant;
